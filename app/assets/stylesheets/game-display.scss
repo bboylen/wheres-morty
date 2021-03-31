@@ -1,0 +1,12 @@
+#game-display {
+  box-sizing: content-box;  
+  width: 100%;
+  max-width: 1460px; //hardcoded based on height value chosen
+  height: 85%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0;
+  background-image: image-url('wheres-morty.jpg');
+  background-size: contain;
+  background-repeat: no-repeat;
+}

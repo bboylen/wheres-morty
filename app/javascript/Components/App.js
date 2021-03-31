@@ -1,9 +1,10 @@
 import React from 'react'
+import GameDisplay from './GameDisplay';
 
 const App = (props) => {
   return (
-    <div>
-      <p>Henlo</p>
+    <div id="app">
+      <GameDisplay />
     </div>
   )
 }
