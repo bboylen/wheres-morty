@@ -1,8 +1,8 @@
 #game-display {
   box-sizing: content-box;  
   width: 100%;
-  max-width: 1460px; //hardcoded based on height value chosen
-  height: 85%;
+  height: 70%;
+  max-width: 1400px; //hardcoded based on height value chosen
   margin-left: auto;
   margin-right: auto;
   padding: 0;
@@ -10,3 +10,5 @@
   background-size: contain;
   background-repeat: no-repeat;
 }
+
+// 1920 1080
