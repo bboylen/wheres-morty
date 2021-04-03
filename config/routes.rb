@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
-  get 'pages/index'
   root 'pages#index'
+
+  namespace :api do 
+    namespace :v1 do
+      get 'characters/index'
+    end
+  end
 end

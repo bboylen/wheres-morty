@@ -7,11 +7,10 @@ const App = (props) => {
   const [locationSelected, setLocationSelected] = useState(false);
 
   const handleLocationSelect = (e) => {
-    console.log(e)
     if (locationSelected) {
       setLocationSelected(false);
     } else {
-      let clickCoordinates = [e.clientX, e.clientY];
+      let clickCoordinates = [e.nativeEvent.offsetX, e.nativeEvent.offsetY];
       setLocationSelected(clickCoordinates);
     }
   }

@@ -9,8 +9,8 @@ const SelectionDisplay = (props) => {
       <div
         id="selection-target"
         style={{
-          left: props.locationSelected[0] - 62,
-          top: props.locationSelected[1] - 62,
+          left: props.locationSelected[0] - 42,
+          top: props.locationSelected[1] + 110,
         }}
       ></div>
       <ul
