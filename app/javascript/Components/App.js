@@ -14,7 +14,7 @@ const App = (props) => {
     })
     .then(data => setCharacters(data))
     .then(error => console.log(error))
-  }, characters)
+  }, [])
 
   const handleLocationSelect = (e) => {
     if (locationSelected) {
@@ -25,10 +25,23 @@ const App = (props) => {
     }
   }
 
+  const handleCharacterSelect = (e) => {
+    console.log(e.target.id)
+    console.log(characters)
+    fetch("/api/v1/characters/1", {
+      method: 'PATCH'
+    })
+    .then(response => {
+      return response.json()
+    })
+    .then(data => setCharacters(data))
+    .then(error => console.log(error))
+  }
+
   return (
     <div id="app">
       <InfoDisplay characters={characters}/>
-      <GameDisplay handleLocationSelect={handleLocationSelect} locationSelected={locationSelected}/>
+      <GameDisplay handleLocationSelect={handleLocationSelect} locationSelected={locationSelected} handleCharacterSelect={handleCharacterSelect}/>
       
     </div>
   )

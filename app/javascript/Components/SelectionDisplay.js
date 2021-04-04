@@ -1,8 +1,6 @@
 import React from "react";
 
 const SelectionDisplay = (props) => {
-  console.log(props.locationSelected[0]);
-  console.log(props.locationSelected[1]);
   let horizontalOffset =
     props.locationSelected[0] / window.outerWidth > 0.5 ? -190 : 60;
   return (
@@ -21,9 +19,11 @@ const SelectionDisplay = (props) => {
           top: props.locationSelected[1] + 32,
         }}
       >
-        <li>Amish Cyborg</li>
-        <li>Pencilvester</li>
-        <li>Mini Cowboy</li>
+        <li id="amish-cyborg" onClick={props.handleCharacterSelect}>
+          Amish Cyborg
+        </li>
+        <li id="pencilvester" onClick={props.handleCharacterSelect}>Pencilvester</li>
+        <li id="mini-cowboy" onClick={props.handleCharacterSelect}>Mini Cowboy</li>
       </ul>
     </div>
   );

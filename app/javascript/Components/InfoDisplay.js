@@ -6,7 +6,11 @@ import cowboyImage from "../../assets/images/mini-cowboy.png";
 
 
 const InfoDisplay = (props) => {
-  console.log(props.characters);
+  let characterFound = [];
+  for (let character of props.characters) {
+    characterFound.push(character.found);
+  }
+
   return (
     <div id="info-display">
       <div id="character-info">
@@ -15,14 +19,17 @@ const InfoDisplay = (props) => {
           <Character
             characterName="Amish Cyborg"
             characterImageUrl={amishCyborgImage}
+            found={characterFound[0]}
           />
           <Character
             characterName="Pencilvester"
             characterImageUrl={pencilvesterImage}
+            found={characterFound[1]}
           />
           <Character
             characterName="Mini Cowboy"
             characterImageUrl={cowboyImage}
+            found={characterFound[2]}
           />
         </div>
       </div>
