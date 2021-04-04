@@ -1,10 +1,20 @@
 import React from 'react'
 import GameDisplay from './GameDisplay';
 import InfoDisplay from './InfoDisplay';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 
 const App = (props) => {
   const [locationSelected, setLocationSelected] = useState(false);
+  const [characters, setCharacters] = useState([]);
+
+  useEffect(() => {
+    fetch("/api/v1/characters/index")
+    .then(response => {
+      return response.json()
+    })
+    .then(data => setCharacters(data))
+    .then(error => console.log(error))
+  }, characters)
 
   const handleLocationSelect = (e) => {
     if (locationSelected) {
@@ -17,7 +27,7 @@ const App = (props) => {
 
   return (
     <div id="app">
-      <InfoDisplay />
+      <InfoDisplay characters={characters}/>
       <GameDisplay handleLocationSelect={handleLocationSelect} locationSelected={locationSelected}/>
       
     </div>

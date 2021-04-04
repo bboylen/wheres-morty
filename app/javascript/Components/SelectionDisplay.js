@@ -2,6 +2,7 @@ import React from "react";
 
 const SelectionDisplay = (props) => {
   console.log(props.locationSelected[0]);
+  console.log(props.locationSelected[1]);
   let horizontalOffset =
     props.locationSelected[0] / window.outerWidth > 0.5 ? -190 : 60;
   return (

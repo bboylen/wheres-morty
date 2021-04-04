@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   namespace :api do 
     namespace :v1 do
-      get 'characters/index'
+      get 'characters/index' => 'characters#index'
     end
   end
 end

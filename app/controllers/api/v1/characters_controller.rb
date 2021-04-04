@@ -1,5 +1,6 @@
 class Api::V1::CharactersController < ApplicationController
   def index
-    @characters
+    characters = Character.all
+    render json: characters
   end
 end

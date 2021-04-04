@@ -6,6 +6,7 @@ import cowboyImage from "../../assets/images/mini-cowboy.png";
 
 
 const InfoDisplay = (props) => {
+  console.log(props.characters);
   return (
     <div id="info-display">
       <div id="character-info">
