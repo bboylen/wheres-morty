@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 const App = (props) => {
   const [locationSelected, setLocationSelected] = useState(false);
   const [characters, setCharacters] = useState([]);
+  const [locationsFound, setLocationsFound] = useState([]);
 
   useEffect(() => {
     fetch("/api/v1/characters/index")
@@ -24,9 +25,9 @@ const App = (props) => {
       setLocationSelected(clickCoordinates);
     }
   };
-  
-  const handleCharacterSelect = (e) => {
-    setCharacterFound(e.target.id);
+
+  const handleCharacterSelect = (charId) => {
+    setCharacterFound(charId);
   };
 
   const setCharacterFound = (character_id) => {
@@ -63,6 +64,7 @@ const App = (props) => {
         handleLocationSelect={handleLocationSelect}
         locationSelected={locationSelected}
         handleCharacterSelect={handleCharacterSelect}
+        characters={characters}
       />
     </div>
   );

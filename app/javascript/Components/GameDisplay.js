@@ -5,7 +5,11 @@ const GameDisplay = (props) => {
   return (
     <div id="game-display" onClick={props.handleLocationSelect}>
       {props.locationSelected ? (
-        <SelectionDisplay locationSelected={props.locationSelected} handleCharacterSelect={props.handleCharacterSelect}/>
+        <SelectionDisplay
+          locationSelected={props.locationSelected}
+          handleCharacterSelect={props.handleCharacterSelect}
+          characters={props.characters}
+        />
       ) : null}
     </div>
   );
