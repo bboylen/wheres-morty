@@ -19,11 +19,11 @@ const SelectionDisplay = (props) => {
           top: props.locationSelected[1] + 32,
         }}
       >
-        <li id="amish-cyborg" onClick={props.handleCharacterSelect}>
+        <li id="1" onClick={props.handleCharacterSelect}>
           Amish Cyborg
         </li>
-        <li id="pencilvester" onClick={props.handleCharacterSelect}>Pencilvester</li>
-        <li id="mini-cowboy" onClick={props.handleCharacterSelect}>Mini Cowboy</li>
+        <li id="2" onClick={props.handleCharacterSelect}>Pencilvester</li>
+        <li id="3" onClick={props.handleCharacterSelect}>Mini Cowboy</li>
       </ul>
     </div>
   );

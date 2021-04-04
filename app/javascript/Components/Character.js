@@ -4,7 +4,7 @@ const Character = (props) => {
   return (
     <div className="character">
       <img src={props.characterImageUrl}></img>
-      <h3>{props.characterName}</h3>
+      <h3 className={(props.found) ? "found" : ""}>{props.characterName}</h3>
     </div>
   )
 }

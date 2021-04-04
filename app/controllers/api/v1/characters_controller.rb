@@ -5,8 +5,15 @@ class Api::V1::CharactersController < ApplicationController
   end
 
   def update
+    puts(params)
     @character = Character.find(params[:id])
-    @character.update(found: true)
+    @character.update(character_params)
     render json: @character
+  end
+
+  private
+
+  def character_params
+    params.require(:character).permit(:id, :found)
   end
 end
