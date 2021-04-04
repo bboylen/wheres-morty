@@ -26,8 +26,9 @@ const App = (props) => {
     }
   };
 
-  const handleCharacterSelect = (charId) => {
+  const handleCharacterSelect = (charId, guessCoordinates) => {
     setCharacterFound(charId);
+    setLocationsFound(locationsFound => [...locationsFound, guessCoordinates]);
   };
 
   const setCharacterFound = (character_id) => {
@@ -65,6 +66,7 @@ const App = (props) => {
         locationSelected={locationSelected}
         handleCharacterSelect={handleCharacterSelect}
         characters={characters}
+        locationsFound={locationsFound}
       />
     </div>
   );

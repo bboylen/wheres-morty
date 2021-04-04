@@ -2,6 +2,7 @@ import React from "react";
 import SelectionDisplay from "./SelectionDisplay";
 
 const GameDisplay = (props) => {
+  console.log(props.locationsFound)
   return (
     <div id="game-display" onClick={props.handleLocationSelect}>
       {props.locationSelected ? (
@@ -11,6 +12,18 @@ const GameDisplay = (props) => {
           characters={props.characters}
         />
       ) : null}
+      {props.locationsFound.map((coordinates) => {
+        return (
+          <div
+            id="selection-target"
+            className="correct"
+            style={{
+              left: coordinates[0] - 42,
+              top: coordinates[1] + 110,
+            }}
+          ></div>
+        );
+      })}
     </div>
   );
 };

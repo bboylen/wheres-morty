@@ -7,6 +7,11 @@
   border: 2px solid red;
 }
 
+#selection-target.correct {
+  border: 3px solid #35fc03;
+  pointer-events: none;
+}
+
 #selection-list {
   position: absolute;
   padding: 10px 10px 10px 10px;

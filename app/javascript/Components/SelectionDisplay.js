@@ -36,7 +36,7 @@ const SelectionDisplay = (props) => {
     let guessCharId = e.target.id;
     if (charInfo[guessCharId].found === false) {
       if (checkGuess(guessCharId) === true) {
-        props.handleCharacterSelect(guessCharId);
+        props.handleCharacterSelect(guessCharId, [props.locationSelected[0], props.locationSelected[1]]);
       }
     }
   };
