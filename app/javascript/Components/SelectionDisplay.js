@@ -1,8 +1,6 @@
 import React from "react";
 
 const SelectionDisplay = (props) => {
-  console.log(props.characters);
-
   let charInfo = {};
   for (let char in props.characters) {
     charInfo[props.characters[char].id] = {
@@ -12,7 +10,6 @@ const SelectionDisplay = (props) => {
     };
   }
 
-  console.log(charInfo);
   let horizontalOffset =
     props.locationSelected[0] / window.outerWidth > 0.5 ? -190 : 60;
 
@@ -33,6 +30,7 @@ const SelectionDisplay = (props) => {
   };
 
   const handleGuess = (e) => {
+    console.log(charInfo)
     let guessCharId = e.target.id;
     if (charInfo[guessCharId].found === false) {
       if (checkGuess(guessCharId) === true) {

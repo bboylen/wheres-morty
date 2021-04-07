@@ -7,6 +7,7 @@ const App = (props) => {
   const [locationSelected, setLocationSelected] = useState(false);
   const [characters, setCharacters] = useState([]);
   const [locationsFound, setLocationsFound] = useState([]);
+  const [gameOver, setGameOver] = useState(false);
 
   useEffect(() => {
     fetch("/api/v1/characters/index")
@@ -31,10 +32,7 @@ const App = (props) => {
     setLocationsFound(locationsFound => [...locationsFound, guessCoordinates]);
   };
 
-  const setCharacterFound = (character_id) => {
-    const data = {
-      found: true
-    }
+  const updateCharacter = (character_id, data) => {
     const token = document.querySelector('meta[name="csrf-token"]').content;
     fetch(`/api/v1/characters/${character_id}`, {
       method: "PATCH",
@@ -49,6 +47,13 @@ const App = (props) => {
       })
       .then((newCharacter) => updateCharacterState(character_id, newCharacter))
       .catch((error) => console.log('Error:', error));
+  }
+
+  const setCharacterFound = (character_id) => {
+    const data = {
+      found: true
+    }
+    updateCharacter(character_id, data);
   };
 
   const updateCharacterState = (id, newCharacter) => {
@@ -56,7 +61,32 @@ const App = (props) => {
     let charIndex = updatedCharacters.findIndex(character => character.id == id);
     updatedCharacters[charIndex] = newCharacter;
     setCharacters(updatedCharacters);
-  }
+  };
+
+  const resetCharacters = () => {
+    const data = {
+      found: false
+    }
+    for (let i = 1; i <= 3; i++) {
+      updateCharacter(i, data);
+    }
+  };
+
+  const endGame = () => {
+    console.log('its over')
+    resetCharacters();
+  };
+
+  //Checks if game is over
+  useEffect(() => {
+    let gameOver = [];
+    for (let char in characters) {
+      gameOver.push((characters[char].found ? true : false));
+    }
+    if (gameOver.every(character => character) && gameOver.length > 0) {
+      endGame();
+    }
+  }, [characters])
 
   return (
     <div id="app">
