@@ -30,7 +30,6 @@ const SelectionDisplay = (props) => {
   };
 
   const handleGuess = (e) => {
-    console.log(charInfo)
     let guessCharId = e.target.id;
     if (charInfo[guessCharId].found === false) {
       if (checkGuess(guessCharId) === true) {

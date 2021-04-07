@@ -33,6 +33,7 @@ const App = (props) => {
   };
 
   const updateCharacter = (character_id, data) => {
+    console.log(`/api/v1/characters/${character_id}`)
     const token = document.querySelector('meta[name="csrf-token"]').content;
     fetch(`/api/v1/characters/${character_id}`, {
       method: "PATCH",
@@ -50,6 +51,7 @@ const App = (props) => {
   }
 
   const setCharacterFound = (character_id) => {
+    
     const data = {
       found: true
     }
@@ -64,11 +66,12 @@ const App = (props) => {
   };
 
   const resetCharacters = () => {
+    // THIS NEEDS TO BE ASYNCHRONOUS????????????????????????????????????????????????????????????????????????????
     const data = {
       found: false
     }
     for (let i = 1; i <= 3; i++) {
-      updateCharacter(i, data);
+      updateCharacter(String(i), data);
     }
   };
 
