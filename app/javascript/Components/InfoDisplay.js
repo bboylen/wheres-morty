@@ -34,7 +34,7 @@ const InfoDisplay = (props) => {
         </div>
       </div>
 
-      <h1>Time:</h1>
+      <h1>{String(Math.floor(props.time/60)).padStart(2, "0")}:{String(props.time%60).padStart(2, "0")}</h1>
     </div>
   );
 };

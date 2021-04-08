@@ -8,7 +8,22 @@ const App = (props) => {
   const [characters, setCharacters] = useState([]);
   const [locationsFound, setLocationsFound] = useState([]);
   const [gameOver, setGameOver] = useState(false);
+  const [timerOn, setTimerOn] = useState(true);
+  const [time, setTime] = useState(0);
 
+  // Set timer
+  useEffect(() => {
+    if (timerOn === false) return;
+    const interval = setInterval(() => {
+      setTime(time+1);
+    }, 1000);
+
+    return () => {
+      clearInterval(interval);
+    }
+  }, [time, gameOver]);
+
+  //Initialize characters as not found
   useEffect(() => {
     setGameOver(false);
 
@@ -94,19 +109,23 @@ const App = (props) => {
   }, [characters]);
 
   const endGame = async () => {
+    setVictoryMessage(`You found them all in ${String(Math.floor(time/60)).padStart(2, "0")}:${String(time%60).padStart(2, "0")}`)
+    setTimerOn(false);
     setModalActive(true);
   };
 
   const handleRestartGame = async () => {
     setModalActive(false);
     await resetCharacters();
+    setTime(0);
+    setTimerOn(true);
     setLocationsFound([]);
     setGameOver(true);
   }
 
   return (
     <div id="app">
-      <InfoDisplay characters={characters} />
+      <InfoDisplay characters={characters} time={time}/>
       <GameDisplay
         handleLocationSelect={handleLocationSelect}
         locationSelected={locationSelected}
