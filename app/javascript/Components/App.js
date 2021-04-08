@@ -10,13 +10,15 @@ const App = (props) => {
   const [gameOver, setGameOver] = useState(false);
 
   useEffect(() => {
+    setGameOver(false);
+
     fetch("/api/v1/characters/index")
       .then((response) => {
         return response.json();
       })
       .then((data) => setCharacters(data))
-      .catch((error) => console.log('Error:', error));
-  }, []);
+      .catch((error) => console.log("Error:", error));
+  }, [gameOver]);
 
   const handleLocationSelect = (e) => {
     if (locationSelected) {
@@ -29,67 +31,78 @@ const App = (props) => {
 
   const handleCharacterSelect = (charId, guessCoordinates) => {
     setCharacterFound(charId);
-    setLocationsFound(locationsFound => [...locationsFound, guessCoordinates]);
+    setLocationsFound((locationsFound) => [
+      ...locationsFound,
+      guessCoordinates,
+    ]);
   };
 
-  const updateCharacter = (character_id, data) => {
-    console.log(`/api/v1/characters/${character_id}`)
+  const updateCharacterState = (id, newCharacter) => {
+    let updatedCharacters = [...characters];
+    let charIndex = updatedCharacters.findIndex(
+      (character) => character.id == id
+    );
+    updatedCharacters[charIndex] = newCharacter;
+    setCharacters(updatedCharacters);
+  };
+
+  const updateCharacter = async (character_id, data) => {
     const token = document.querySelector('meta[name="csrf-token"]').content;
-    fetch(`/api/v1/characters/${character_id}`, {
+    await fetch(`/api/v1/characters/${character_id}`, {
       method: "PATCH",
       headers: {
         "X-CSRF-Token": token,
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     })
       .then((response) => {
         return response.json();
       })
       .then((newCharacter) => updateCharacterState(character_id, newCharacter))
-      .catch((error) => console.log('Error:', error));
-  }
+      .catch((error) => console.log("Error:", error));
+  };
 
   const setCharacterFound = (character_id) => {
-    
     const data = {
-      found: true
-    }
+      found: true,
+    };
     updateCharacter(character_id, data);
   };
 
-  const updateCharacterState = (id, newCharacter) => {
-    let updatedCharacters = [...characters];
-    let charIndex = updatedCharacters.findIndex(character => character.id == id);
-    updatedCharacters[charIndex] = newCharacter;
-    setCharacters(updatedCharacters);
-  };
-
-  const resetCharacters = () => {
-    // THIS NEEDS TO BE ASYNCHRONOUS????????????????????????????????????????????????????????????????????????????
+  const resetCharacters = async () => {
     const data = {
-      found: false
-    }
+      found: false,
+    };
     for (let i = 1; i <= 3; i++) {
-      updateCharacter(String(i), data);
+      await updateCharacter(String(i), data);
     }
   };
 
-  const endGame = () => {
-    console.log('its over')
-    resetCharacters();
-  };
+  const [modalActive, setModalActive] = useState(false);
+  const [victoryMessage, setVictoryMessage] = useState("You found them all!");
 
   //Checks if game is over
   useEffect(() => {
     let gameOver = [];
     for (let char in characters) {
-      gameOver.push((characters[char].found ? true : false));
+      gameOver.push(characters[char].found ? true : false);
     }
-    if (gameOver.every(character => character) && gameOver.length > 0) {
+    if (gameOver.every((character) => character) && gameOver.length > 0) {
       endGame();
     }
-  }, [characters])
+  }, [characters]);
+
+  const endGame = async () => {
+    setModalActive(true);
+  };
+
+  const handleRestartGame = async () => {
+    setModalActive(false);
+    await resetCharacters();
+    setLocationsFound([]);
+    setGameOver(true);
+  }
 
   return (
     <div id="app">
@@ -100,6 +113,9 @@ const App = (props) => {
         handleCharacterSelect={handleCharacterSelect}
         characters={characters}
         locationsFound={locationsFound}
+        modalActive={modalActive}
+        handleRestartGame={handleRestartGame}
+        victoryMessage={victoryMessage}
       />
     </div>
   );

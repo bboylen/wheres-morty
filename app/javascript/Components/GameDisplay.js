@@ -1,5 +1,6 @@
 import React from "react";
 import SelectionDisplay from "./SelectionDisplay";
+import GameOverModal from "./GameOverModal";
 
 const GameDisplay = (props) => {
   return (
@@ -23,6 +24,9 @@ const GameDisplay = (props) => {
           ></div>
         );
       })}
+      {props.modalActive ? (
+        <GameOverModal victoryMessage={props.victoryMessage} handleRestartGame={props.handleRestartGame}/>
+      ) : null}
     </div>
   );
 };
