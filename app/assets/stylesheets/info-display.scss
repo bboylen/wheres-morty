@@ -1,5 +1,5 @@
 #info-display {
-  position: relative;
+  position: fixed;
   box-sizing: content-box;  
   display: flex;
   justify-content: space-around;
@@ -46,4 +46,79 @@
 
 .character h3.found {
   text-decoration: line-through;
+}
+
+@media only screen and (max-width: 800px) {
+  #character-info {
+    margin-top: -20px;
+  }
+  
+  .character {
+    font-size: 14px;
+    width: 60px;
+    height: 60px;
+  }
+
+  .character img {
+    width: 60px;
+    height: 60px;
+  }
+
+  #info-display h1{
+    font-size: 28px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  #character-info {
+    flex-direction: column;
+    align-items: center;
+    margin-top: -30px;
+  }
+
+  #character-info h1 {
+    margin-bottom: 15px;
+  }
+
+  .character {
+    font-size: 13px;
+    width: 55px;
+    height: 55px;
+  }
+
+  .character img {
+    width: 55px;
+    height: 55px;
+  }
+
+  #info-display h1{
+    font-size: 22px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  #character-info {
+    flex-direction: column;
+    align-items: center;
+    margin-top: -30px;
+  }
+
+  #character-info h1 {
+    margin-bottom: 15px;
+  }
+
+  .character {
+    font-size: 12px;
+    width: 45px;
+    height: 45px;
+  }
+
+  .character img {
+    width: 45px;
+    height: 45px;
+  }
+
+  #info-display h1{
+    font-size: 19px;
+  }
 }
