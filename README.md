@@ -9,7 +9,7 @@ Part of the curriculum for [The Odin Project](https://www.theodinproject.com/pat
 ## Features
 
 - Character information stored on Rails backend using PostgreSQL database
-- Uses React with hooks on the frontend
+- Uses React Hooks to dynamically update game state
 - Makes API calls to backend to check character placements
 - Responsive design that works on mobile
 
